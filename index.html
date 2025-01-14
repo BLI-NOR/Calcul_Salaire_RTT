@@ -105,6 +105,8 @@
             <input type="number" id="input3" placeholder="Entrez le salaire brut annuel pour 0 RTT">
         </div>
 
+        <button onclick="reset()">Reset</button>
+
         <button onclick="calculer()">Calculer</button>
 
         <div id="alert-message" class="alert"></div>
@@ -124,7 +126,7 @@
             alertMessage.textContent = '';
 
             // Vérifier si Input1 est rempli
-            if (!isNaN(input1) && input1 !== "") {
+            if (!isNaN(input1.value) && input1 !== "") {
                 // Calculer input2 et input3 en fonction de input1
                 input2.value = (input1 + (input1 * 0.07)).toFixed(2); // 2 décimales
                 input3.value = (input1 + (input1 * 0.14)).toFixed(2); // 2 décimales
@@ -134,19 +136,23 @@
                 var input2Value = parseFloat(input2.value);
                 // Calculer input1 et input3 en fonction de input2
                 input1 = (input2Value / 1.07).toFixed(2); // Inverser la formule
-                input3.value = (input2Value + (input2Value * 0.14)).toFixed(2); // 2 décimales
-                document.getElementById('input1').value = input1;
+                input3.value = (input2Value + (input2Value * 0.07)).toFixed(2); // 2 décimales
             }
             // Vérifier si Input3 est rempli
             else if (!isNaN(input3.value) && input3.value !== "") {
                 var input3Value = parseFloat(input3.value);
                 // Calculer input1 et input2 en fonction de input3
                 input1 = (input3Value / 1.14).toFixed(2); // Inverser la formule
-                input2.value = (input1 + (input1 * 0.07)).toFixed(2); // 2 décimales
-                document.getElementById('input1').value = input1;
+                input2 = (input3Value / 1.07).toFixed(2); // 2 décimales
             } else {
                 alertMessage.textContent = "Veuillez entrer une valeur dans l'un des champs !";
             }
+        }
+
+        function reset() {
+            document.getElementById('input1').value = '';
+            document.getElementById('input2').value = '';
+            document.getElementById('input3').value = '';
         }
     </script>
 
