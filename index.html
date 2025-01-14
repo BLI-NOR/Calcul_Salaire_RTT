@@ -3,152 +3,131 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv='cache-control' content='no-cache'> 
-    <meta http-equiv='expires' content='0'> 
-    <meta http-equiv='pragma' content='no-cache'>
-    <title>Calculateur SALAIRE / RTT</title>
+    <title>Calcul Salaire RTT</title>
     <style>
+        /* Fond général */
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f4f7fc;
+            background-color: #000000; /* Fond noir */
+            color: #00FF00; /* Texte vert fluo, typique de l'effet Matrix */
+            font-family: 'Courier New', Courier, monospace; /* Police monospace pour un look geek */
             margin: 0;
             padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            overflow: hidden;
         }
-        h1 {
-            color: #2c3e50;
-            font-size: 2rem;
-            margin-bottom: 20px;
-            text-align: center;
+
+        /* Texte avec un effet d'ombrage */
+        h1, h2, h3, p, .title {
+            text-shadow: 0px 0px 10px rgba(0, 255, 0, 0.8), 0px 0px 20px rgba(0, 255, 0, 0.6);
         }
-        .container {
-            background-color: #ffffff;
-            border-radius: 8px;
+
+        /* Liens en vert fluo */
+        a {
+            color: #00FF00;
+            text-decoration: none;
+            text-shadow: 0px 0px 10px rgba(0, 255, 0, 0.8);
+        }
+
+        a:hover {
+            text-decoration: underline;
+            color: #00CC00;
+        }
+
+        /* Ajout d'un effet de pluie de caractères (Matrix) */
+        @keyframes rain {
+            0% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(100vh);
+            }
+        }
+
+        /* Effet de "pluie" d'éléments (personnalisé selon vos besoins) */
+        .matrix-rain {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .matrix-rain span {
+            position: absolute;
+            color: #00FF00;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 20px;
+            animation: rain 4s linear infinite;
+        }
+
+        .matrix-rain span:nth-child(odd) {
+            animation-duration: 3s;
+        }
+
+        .matrix-rain span:nth-child(even) {
+            animation-duration: 5s;
+        }
+
+        /* Ajouter une animation en arrière-plan */
+        .bg-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            pointer-events: none;
+        }
+
+        /* Contenu principal */
+        .content {
+            position: relative;
+            z-index: 10;
             padding: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 400px;
-            box-sizing: border-box;
-        }
-        label {
-            font-size: 1rem;
-            margin-bottom: 8px;
-            color: #34495e;
-        }
-        input {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            font-size: 1rem;
-            border: 2px solid #ddd;
-            border-radius: 4px;
-            box-sizing: border-box;
-            transition: border-color 0.3s;
-        }
-        input:focus {
-            border-color: #3498db;
-            outline: none;
-        }
-        button {
-            width: 100%;
-            padding: 12px;
-            background-color: #3498db;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        button:hover {
-            background-color: #2980b9;
-        }
-        button:focus {
-            outline: none;
-        }
-        .alert {
-            color: #e74c3c;
             text-align: center;
-            font-size: 0.9rem;
         }
-        .input-container {
-            margin-bottom: 10px;
+
+        .title {
+            font-size: 3rem;
+            margin-bottom: 20px;
         }
-        .note {
-            font-size: 0.85rem;
-            color: #7f8c8d;
-            text-align: center;
-            margin-top: 15px;
+
+        .description {
+            font-size: 1.5rem;
+            margin: 20px 0;
+        }
+
+        .link {
+            font-size: 1.2rem;
         }
     </style>
 </head>
 <body>
-
-    <div class="container">
-        <h1>Calculateur SALAIRE / RTT</h1>
-
-        <div class="input-container">
-            <label for="input1">Brut annuel + 47 jours de congés par an</label>
-            <input type="number" id="input1" placeholder="Entrez le salaire brut annuel pour 20 RTT">
-        </div>
-
-        <div class="input-container">
-            <label for="input2">Brut annuel + 35 jours de congés par an</label>
-            <input type="number" id="input2" placeholder="Entrez le salaire brut annuel pour 8 RTT">
-        </div>
-
-        <div class="input-container">
-            <label for="input3">Brut annuel + 27 jours de congés par an</label>
-            <input type="number" id="input3" placeholder="Entrez le salaire brut annuel pour 0 RTT">
-        </div>
-
-        <button onclick="calculer()">Calculer</button>
-
-        <div id="alert-message" class="alert"></div>
-
-        <p class="note">Les calculs se basent sur une augmentation de 7% pour 35 jours et de 14% pour 27 jours de congés.</p>
+    <!-- Effet de pluie de caractères -->
+    <div class="matrix-rain">
+        <span>1</span>
+        <span>0</span>
+        <span>1</span>
+        <span>1</span>
+        <span>0</span>
+        <span>1</span>
+        <span>0</span>
+        <span>1</span>
+        <span>1</span>
+        <span>0</span>
+        <!-- Vous pouvez ajouter plus de spans pour augmenter l'effet -->
     </div>
 
-    <script>
-        function calculer() {
-            // Récupérer les valeurs des inputs
-            var input1 = parseFloat(document.getElementById('input1').value);
-            var input2 = document.getElementById('input2');
-            var input3 = document.getElementById('input3');
-            var alertMessage = document.getElementById('alert-message');
+    <!-- Superposition sombre pour un effet d'ambiance -->
+    <div class="bg-overlay"></div>
 
-            // Réinitialiser l'alerte
-            alertMessage.textContent = '';
-
-            // Vérifier si Input1 est rempli
-            if (!isNaN(input1) && input1 !== "") {
-                // Calculer input2 et input3 en fonction de input1
-                input2.value = (input1 + (input1 * 0.07)).toFixed(2); // 2 décimales
-                input3.value = (input1 + (input1 * 0.14)).toFixed(2); // 2 décimales
-            }
-            // Vérifier si Input2 est rempli
-            else if (!isNaN(input2.value) && input2.value !== "") {
-                var input2Value = parseFloat(input2.value);
-                // Calculer input1 et input3 en fonction de input2
-                input1 = (input2Value / 1.07).toFixed(2); // Inverser la formule
-                input3.value = (input2Value + (input2Value * 0.14)).toFixed(2); // 2 décimales
-                document.getElementById('input1').value = input1;
-            }
-            // Vérifier si Input3 est rempli
-            else if (!isNaN(input3.value) && input3.value !== "") {
-                var input3Value = parseFloat(input3.value);
-                // Calculer input1 et input2 en fonction de input3
-                input1 = (input3Value / 1.14).toFixed(2); // Inverser la formule
-                input2.value = (input1 + (input1 * 0.07)).toFixed(2); // 2 décimales
-                document.getElementById('input1').value = input1;
-            } else {
-                alertMessage.textContent = "Veuillez entrer une valeur dans l'un des champs !";
-            }
-        }
-    </script>
-
+    <!-- Contenu principal de la page -->
+    <div class="content">
+        <h1 class="title">Calcul Salaire & RTT</h1>
+        <p class="description">Bienvenue dans l'outil de calcul de votre salaire avec les jours RTT. Utilisez ce calculateur pour estimer vos gains en fonction de vos heures de travail et de vos congés.</p>
+        <a href="#" class="link">En savoir plus</a>
+    </div>
 </body>
 </html>
