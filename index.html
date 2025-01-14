@@ -157,18 +157,20 @@
                 input3.value = (input1.value * 1.12).toFixed(2); // 2 décimales
             }
             // Vérifier si Input2 est rempli
-            else if (!isNaN(input2) && input2.value !== "") {
+            else if (!isNaN(input2.value) && input2.value !== "") {
                 var input2Value = parseFloat(input2.value);
                 // Calculer input1 et input3 en fonction de input2
-                input1.value = (input2.value / 1.07).toFixed(2); // Inverser la formule
-                input3.value = (input1 * 1.12).toFixed(2); // 2 décimales
+                input1.value = (input2Value.value / 1.07).toFixed(2); // Inverser la formule
+                input3.value = (input1.value * 1.12).toFixed(2); // 2 décimales
+                //document.getElementById('input1').value = input1;
             }
             // Vérifier si Input3 est rempli
-            else if (!isNaN(input3) && input3.value !== "") {
+            else if (!isNaN(input3.value) && input3.value !== "") {
                 var input3Value = parseFloat(input3.value);
                 // Calculer input1 et input2 en fonction de input3
-                input1.value = (input3.value / 1.12).toFixed(2); // Inverser la formule
+                input1.value = (input3Value / 1.12).toFixed(2); // Inverser la formule
                 input2.value = (input1.value * 1.07).toFixed(2); // 2 décimales
+                //document.getElementById('input1').value = input1;
             } else {
                 alertMessage.textContent = "Veuillez entrer une valeur dans l'un des champs !";
             }
