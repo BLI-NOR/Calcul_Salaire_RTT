@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculateur</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        label {
+            margin-right: 10px;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            width: 200px;
+        }
+        input {
+            margin: 5px 0;
+            padding: 10px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Calculateur</h1>
+
+    <div class="container">
+        <label for="input1">Entrée 1 :</label>
+        <input type="number" id="input1" placeholder="Entrez un nombre">
+        
+        <label for="input2">Entrée 2 :</label>
+        <input type="number" id="input2" placeholder="Calculé automatiquement" readonly>
+
+        <label for="input3">Entrée 3 :</label>
+        <input type="number" id="input3" placeholder="Calculé automatiquement" readonly>
+
+        <button onclick="calculer()">Calculer</button>
+    </div>
+
+    <script>
+        function calculer() {
+            // Récupérer les valeurs des inputs
+            var input1 = document.getElementById('input1').value;
+            var input2 = document.getElementById('input2');
+            var input3 = document.getElementById('input3');
+            
+            // Si l'utilisateur entre une valeur dans input1
+            if (input1 !== "") {
+                // Effectuer des calculs en fonction de input1
+                // Exemple : disons que input2 = input1 * 2 et input3 = input1 / 2
+                input2.value = input1 * 2;
+                input3.value = input1 / 2;
+            }
+            else {
+                alert("Veuillez entrer une valeur dans l'Entrée 1 !");
+            }
+        }
+    </script>
+
+</body>
+</html>
